@@ -9,14 +9,14 @@ function sortAccountsByLastName(accounts) {
   })
   return sortedAccounts;
 }
-
-function getTotalNumberOfBorrows(account, books) {
+//filters all book object's borrow arrays that contain the account ID and returns the number of borrows associated with that account
+function getTotalNumberOfBorrows(account, books) { 
   const numOfBorrows = books.filter((book) => {
     return book.borrows.some((bookId) => bookId.id === account.id)
   })
   return numOfBorrows.length;
 }
-
+//returns an array of all book objects that are currently checked out by an account and adds the author information to each of these books
 function getBooksPossessedByAccount(account, books, authors) {
   let checkedOutBooks = [];
   books.forEach((book) => {
