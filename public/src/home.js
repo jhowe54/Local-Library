@@ -66,23 +66,21 @@ function getMostPopularBooks(books) {
 }
 
 
-
+/* 
+    -create an empty array to store each new author object in
+    -go through all author objects in the authors array
+    -create an array of book objects with the corresponding id to the current author id --i.e an array of all books for a particular author
+    -adds the length(total number of borrows per book) of each of the author's books and adds them together --> gives the total amount of book borrows for an author
+    -create a object with the authors first and last name and their total borrow count
+    -sort our new author array for the top 5 authors according to borrow count
+*/
 function getMostPopularAuthors(books, authors) {
-    //create an empty array to store each new author object in
     const authorArray = [];
-    //go through all author objects in the authors array
     authors.forEach((author) => {
-
-        /*creates an array of book objects with the corresponding id to the current author id 
-        --i.e an array of all books for a particular author */
         const authorFilter = books.filter((book) => book.authorId === author.id)
-        //adds the length(total number of borrows per book) of each of the author's books and adds them together --> gives the total amount of book borrows for an author
-        const authorCount = authorFilter.reduce((totalBorrows, book) => totalBorrows + book.borrows.length, 0); //initital accumulator value MUST be set to 0; 
-
-        //create a object with the authors first and last name and their total borrow count
+        const authorCount = authorFilter.reduce((totalBorrows, book) => totalBorrows + book.borrows.length, 0); //initital accumulator value MUST be set to 0;
         authorArray.push({ name: author.name.first + " " + author.name.last, count: authorCount })
     })
-    //sort our new author array for the top 5 authors according to borrow count 
     const sortedAuthorArray = authorArray.sort((auth1, auth2) => auth1.count < auth2.count ? 1 : -1);
     return authorArray.slice(0, 5);
 }
